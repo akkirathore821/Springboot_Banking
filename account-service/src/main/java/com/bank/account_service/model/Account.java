@@ -3,6 +3,7 @@ package com.bank.account_service.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Random;
 
 @Entity
 @Table(name = "account")
@@ -10,6 +11,8 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
+    @Column(unique = true, nullable = false)
+    private String accountNumber;
     private String accountHolder;
     @Column(nullable = false)
     private BigDecimal balance = BigDecimal.ZERO;
@@ -18,9 +21,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(String accountHolder, Long accountId) {
+    public Account(String accountHolder, String accountNumber) {
+        this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
-        this.accountId = accountId;
     }
 
     public Long getAccountId() {
@@ -29,6 +32,14 @@ public class Account {
 
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public String getAccountHolder() {

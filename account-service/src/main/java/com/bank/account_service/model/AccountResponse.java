@@ -1,36 +1,37 @@
 package com.bank.account_service.model;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 
 import java.math.BigDecimal;
 
-public class AccountDto {
-    private Long accountId;
-    @NotNull(message = "Amount cannot be null")
+@Data
+public class AccountResponse {
+    private String accountNumber;
     private String accountHolder;
     private BigDecimal balance;
 
-    public AccountDto() {
+    public AccountResponse() {
     }
 
-    public AccountDto(Long accountId,BigDecimal balance) {
-        this.accountId = accountId;
+    public AccountResponse(String accountNumber, BigDecimal balance) {
+        this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    public AccountDto(Long accountId, String accountHolder, BigDecimal balance) {
-        this.accountId = accountId;
+    public AccountResponse(String accountNumber, String accountHolder, BigDecimal balance) {
+        this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.balance = balance;
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setAccountId(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public String getAccountHolder() {
@@ -52,7 +53,7 @@ public class AccountDto {
     @Override
     public String toString() {
         return "AccountDto{" +
-                "accountId=" + accountId +
+                "accountNumber=" + accountNumber +
                 ", accountHolder='" + accountHolder + '\'' +
                 ", balance=" + balance +
                 '}';

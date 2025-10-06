@@ -1,24 +1,29 @@
 package com.bank.account_service.model;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class BalanceUpdateRequest {
-    private Long accountId;
+    private String accountNumber;
     private BigDecimal amount;
     private String operation; // "DEBIT" or "CREDIT"
 
-    public BalanceUpdateRequest(Long accountId, BigDecimal amount, String operation) {
-        this.accountId = accountId;
+    public BalanceUpdateRequest(){}
+
+    public BalanceUpdateRequest(String accountNumber, BigDecimal amount, String operation) {
+        this.accountNumber = accountNumber;
         this.amount = amount;
         this.operation = operation;
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public BigDecimal getAmount() {
