@@ -1,0 +1,5 @@
+package com.bank.fraud_service.constants;
+
+public class Constants {
+    public static final String Transaction_Topic_Name = "bank-transaction-topic";
+}
