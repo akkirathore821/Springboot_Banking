@@ -1,26 +1,24 @@
 package com.bank.transaction_service.model;
 
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
-
 import java.math.BigDecimal;
-import java.time.Instant;
 
-@Data
-@Entity
-@Table(name = "Transaction")
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class TransactionResponse {
     private String accountNumber;
     private String type; // DEPOSIT, WITHDRAW, TRANSFER
     private BigDecimal amount;
     private String targetAccountNumber; // for transfer
-    private Instant createdAt = Instant.now();
+    private BigDecimal balance;
+
+    public TransactionResponse(){
+    }
+
+    public TransactionResponse(String accountNumber, String type, BigDecimal amount, String targetAccountNumber, BigDecimal balance) {
+        this.accountNumber = accountNumber;
+        this.type = type;
+        this.amount = amount;
+        this.targetAccountNumber = targetAccountNumber;
+        this.balance = balance;
+    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -54,20 +52,11 @@ public class Transaction {
         this.targetAccountNumber = targetAccountNumber;
     }
 
-    public Long getId() {
-        return id;
+    public BigDecimal getBalance() {
+        return balance;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }
-

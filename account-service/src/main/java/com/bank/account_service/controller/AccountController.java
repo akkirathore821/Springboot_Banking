@@ -40,8 +40,8 @@ public class AccountController {
 
     @GetMapping("/{accountNumber}")
     @Transactional
-    public ResponseEntity<AccountResponse> getAccountByNumber(@PathVariable String accountNumber) {
-        log.info("AccountController:getAccountById:Init...");
+    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@PathVariable String accountNumber) {
+        log.info("AccountController:getAccountByAccountNumber:Init...");
 
         if (!accountNumber.matches("^[A-Z\\d\\s]+$")) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,
@@ -50,7 +50,7 @@ public class AccountController {
 
         AccountResponse result = accountService.getAccount(accountNumber);
 
-        log.info("AccountController:getAccountById:End...");
+        log.info("AccountController:getAccountByAccountNumber:End...");
         return ResponseEntity.ok(result);
     }
 

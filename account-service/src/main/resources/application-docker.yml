@@ -23,3 +23,11 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://host.docker.internal:8761/eureka/
+  instance:
+    hostname: account-service
+    prefer-ip-address: false

@@ -7,37 +7,32 @@ import java.math.BigDecimal;
 
 public class TransferRequest {
 
-    @NotNull(message = "From Account ID cannot be null")
-    private Long fromAccountId;
-
-    @NotNull(message = "To Account ID cannot be null")
-    private Long toAccountId;
-
-    @NotNull(message = "Amount cannot be null")
-    @Min(value = 1, message = "Amount must be greater than 0")
+    //Todo Validation
+    private String senderAccountNumber;
+    private String receiverAccountNumber;
     private BigDecimal amount;
 
-    public Long getFromAccountId() {
-        return fromAccountId;
+    public String getSenderAccountNumber() {
+        return senderAccountNumber;
     }
 
-    public void setFromAccountId(Long fromAccountId) {
-        this.fromAccountId = fromAccountId;
+    public void setSenderAccountNumber(String senderAccountNumber) {
+        this.senderAccountNumber = senderAccountNumber;
     }
 
-    public Long getToAccountId() {
-        return toAccountId;
+    public String getReceiverAccountNumber() {
+        return receiverAccountNumber;
     }
 
-    public void setToAccountId(Long toAccountId) {
-        this.toAccountId = toAccountId;
+    public void setReceiverAccountNumber(String receiverAccountNumber) {
+        this.receiverAccountNumber = receiverAccountNumber;
     }
 
-    public @Min(1) BigDecimal getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(@Min(1) BigDecimal amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

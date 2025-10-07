@@ -7,6 +7,7 @@ import java.util.Random;
 
 @Data
 public class CreateAccountRequest {
+    //Todo Validation
     private String accountNumber;
     private String accountHolder;
 

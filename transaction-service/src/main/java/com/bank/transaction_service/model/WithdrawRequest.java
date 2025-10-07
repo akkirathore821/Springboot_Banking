@@ -2,30 +2,30 @@ package com.bank.transaction_service.model;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
+@Data
 public class WithdrawRequest {
-    @NotNull(message = "Account ID cannot be null")
-    private Long accountId;
 
-    @NotNull(message = "Amount cannot be null")
-    @Min(value = 1, message = "Amount must be greater than 0")
+    //Todo Validation
+    private String accountNumber;
     private BigDecimal amount;
 
-    public @NotNull(message = "Account ID cannot be null") Long getAccountId() {
-        return accountId;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setAccountId(@NotNull(message = "Account ID cannot be null") Long accountId) {
-        this.accountId = accountId;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public @NotNull(message = "Amount cannot be null") @Min(value = 1, message = "Amount must be greater than 0") BigDecimal getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(@NotNull(message = "Amount cannot be null") @Min(value = 1, message = "Amount must be greater than 0") BigDecimal amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
