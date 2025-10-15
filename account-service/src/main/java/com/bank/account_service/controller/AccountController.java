@@ -4,6 +4,7 @@ import com.bank.account_service.model.AccountResponse;
 import com.bank.account_service.model.BalanceUpdateRequest;
 import com.bank.account_service.model.CreateAccountRequest;
 import com.bank.account_service.service.AccountService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -15,6 +16,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/accounts")
 public class AccountController {
 
@@ -22,13 +24,14 @@ public class AccountController {
     private final AccountService accountService;
     private final StringRedisTemplate redisTemplate;
 
-    public AccountController(AccountService accountService, StringRedisTemplate redisTemplate) {
-        this.accountService = accountService;
-        this.redisTemplate = redisTemplate;
-    }
+//    public AccountController(AccountService accountService, StringRedisTemplate redisTemplate) {
+//        this.accountService = accountService;
+//        this.redisTemplate = redisTemplate;
+//    }
 
     @PostMapping("/create")
     @Transactional
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AccountResponse> createAccount(@RequestBody CreateAccountRequest request) {
         log.info("AccountController:createAccount:Init...");
 
