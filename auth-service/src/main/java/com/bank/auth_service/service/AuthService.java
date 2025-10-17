@@ -23,7 +23,7 @@ public class AuthService {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         if(authenticate.isAuthenticated()){
             return JWTTokenResponse.builder()
-                    .token(jwtService.generateToken(loginRequest.getUsername()))
+                    .token(jwtService.generateToken("loginRequest.getUsername()"))
                     .build();
         }else throw new WrongCredentialException("Wrong Credential");
     }
