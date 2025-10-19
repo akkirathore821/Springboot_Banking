@@ -1,6 +1,8 @@
 package com.bank.jwt_service_demo.config;
 
+import com.bank.jwt_service_demo.jwt.JwtAuthenticationFilter;
 import com.bank.jwt_service_demo.service.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,16 +13,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class AuthConfig {
 
-    private final UserDetailsServiceImpl userDetailsService;
-
-    public AuthConfig(UserDetailsServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,8 +36,8 @@ public class AuthConfig {
                         .anyRequest().authenticated()
                 )
 
-                // ✅ Enable Basic Auth
-                .httpBasic(httpBasic -> {})
+//                // ✅ Enable Basic Auth
+//                .httpBasic(httpBasic -> {})
 
                 // ✅ Set your UserDetailsService
                 .userDetailsService(userDetailsService)
@@ -44,6 +46,8 @@ public class AuthConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .build();
     }
