@@ -1,35 +1,52 @@
 package com.bank.auth_service.service;
 
-import com.bank.auth_service.exceptions.WrongCredentialException;
+import com.bank.auth_service.exception.WrongCredentialsException;
+import com.bank.auth_service.model.AuthDetails;
+import com.bank.auth_service.model.AuthRequest;
 import com.bank.auth_service.model.JWTTokenResponse;
-import com.bank.auth_service.model.LoginRequest;
-import com.bank.auth_service.model.RegisterRequest;
 import com.bank.auth_service.model.RegisterResponse;
+import com.bank.auth_service.repo.AuthRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.WriteAbortedException;
-import java.lang.WrongThreadException;
-
 @Service
+@Slf4j
 public class AuthService {
-    private final AuthenticationManager authenticationManager;
-    private final UserServiceClient userServiceClient;
-    private final JwtService jwtService;
 
-    public JWTTokenResponse login(LoginRequest loginRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        if(authenticate.isAuthenticated()){
+    @Autowired
+    private AuthRepository repository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtService jwtService;
+
+    public JWTTokenResponse login(AuthRequest request) {
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
+
+        if(authentication.isAuthenticated()){
             return JWTTokenResponse.builder()
-                    .token(jwtService.generateToken("loginRequest.getUsername()"))
+                    .token(jwtService.generateToken(request.getUsername()))
                     .build();
-        }else throw new WrongCredentialException("Wrong Credential");
+        }else throw new WrongCredentialsException("Wrong credentials");
     }
 
+    public RegisterResponse register(AuthRequest request) {
+        AuthDetails newUser = AuthDetails.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .build();
+        newUser = repository.save(newUser);
 
-    //Todo
-//    public RegisterResponse register(RegisterRequest registerRequest) {
-//    }
+        return RegisterResponse.builder()
+                .username(newUser.getUsername())
+                .build();
+    }
 }
