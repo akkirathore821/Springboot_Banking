@@ -11,10 +11,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: account-service
-          uri: lb://account-service
-          predicates:
-            - Path=/api/accounts/**
+#        - id: account-service
+#          uri: lb://account-service
+#          predicates:
+#            - Path=/api/accounts/**
         - id: transaction-service
           uri: lb://transaction-service
           predicates:

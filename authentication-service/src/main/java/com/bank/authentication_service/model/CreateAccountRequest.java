@@ -1,16 +1,12 @@
-package com.bank.account_service.model;
+package com.bank.authentication_service.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import java.util.Random;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateAccountRequest {
-    //Todo Validation
     private String accountNumber;
     private String accountHolder;
 

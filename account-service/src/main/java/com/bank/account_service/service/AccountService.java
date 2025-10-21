@@ -22,34 +22,29 @@ public class AccountService {
     }
 
     public AccountResponse create(CreateAccountRequest request) {
-        log.info("AccountService:create:Init...");
+        //Todo  Need to do some changes
 
         Account account = new Account(request.getAccountHolder(), request.getAccountNumber());
         account = accountRepository.save(account);
 
-        log.info("AccountService:create:End...");
         return new AccountResponse(account.getAccountNumber(), account.getAccountHolder(), account.getBalance());
     }
 
     public AccountResponse getAccount(String accountNumber) {
-        log.info("AccountService:getAccount:Init...");
 
         Account account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new RuntimeException("Account not found with account number: " + accountNumber));
 
-        log.info("AccountService:getAccount:End...");
         return new AccountResponse(account.getAccountNumber(), account.getAccountHolder(), account.getBalance());
     }
 
 
     public AccountResponse updateBalance(BalanceUpdateRequest request) {
-        log.info("AccountService:updateBalance:Init...");
 
         String accountNumber = request.getAccountNumber();
         Account account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new RuntimeException("Account not found with accountNumber: " + accountNumber));
 
-        log.info("AccountService:updateBalance:Updating Balance...");
         if ("DEBIT".equalsIgnoreCase(request.getOperation())) {
             if (account.getBalance().compareTo(request.getAmount()) < 0) {
                 throw new RuntimeException("Insufficient balance in account " + account);
@@ -63,7 +58,6 @@ public class AccountService {
 
         account = accountRepository.save(account);
 
-        log.info("AccountService:updateBalance:End...");
         return new AccountResponse(account.getAccountNumber(), account.getAccountHolder(), account.getBalance());
     }
 

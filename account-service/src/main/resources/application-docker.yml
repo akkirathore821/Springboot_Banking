@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/bankservices
+    url: jdbc:postgresql://host.docker.internal:5432/bankaccounts
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
