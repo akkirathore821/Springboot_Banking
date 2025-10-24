@@ -1,6 +1,6 @@
 package com.bank.authentication_service.config;
 
-import com.bank.authentication_service.jwt.JwtAuthenticationFilter;
+
 import com.bank.authentication_service.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +21,8 @@ public class AuthConfig {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+//    @Autowired
+//    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,24 +32,22 @@ public class AuthConfig {
 
                 // ✅ Authorization configuration
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**","/api/auth_details/**").permitAll()
                         .anyRequest().authenticated()
-                )
+                ).build();
 
 //                // ✅ Enable Basic Auth
 //                .httpBasic(httpBasic -> {})
-
-                // ✅ Set your UserDetailsService
-                .userDetailsService(userDetailsService)
-
-                // ✅ Disable sessions for JWT-based APIs
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-
-                .build();
+//
+//                // ✅ Set your UserDetailsService
+//                .userDetailsService(userDetailsService)
+//
+//                // ✅ Disable sessions for JWT-based APIs
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                )
+//
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
     }
 
     @Bean

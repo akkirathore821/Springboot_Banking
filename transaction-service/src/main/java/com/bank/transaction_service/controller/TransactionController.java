@@ -29,9 +29,10 @@ public class TransactionController {
 
 
     @PostMapping("/deposit")
-    @Transactional
-    public ResponseEntity<TransactionResponse> deposit(@RequestBody DepositRequest request) {
-        log.info("TransactionController:deposit:Init...");
+    public ResponseEntity<TransactionResponse> deposit(@RequestBody DepositRequest request,
+                                                       @RequestHeader("accountNumber") String accountNumberFromHeader) {
+
+        request.setAccountNumber(accountNumberFromHeader);
 
         TransactionResponse result = transactionService.deposit(request);
 
@@ -43,14 +44,14 @@ public class TransactionController {
 //        evt.put("amount", request.getAmount());
 //        transactionService.publish(evt);
 
-        log.info("TransactionController:deposit:End...");
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/withdraw")
-    @Transactional
-    public ResponseEntity<TransactionResponse> withdraw(@RequestBody WithdrawRequest request) {
-        log.info("TransactionController:withdraw:Init...");
+    public ResponseEntity<TransactionResponse> withdraw(@RequestBody WithdrawRequest request,
+                                                        @RequestHeader("accountNumber") String accountNumberFromHeader) {
+
+        request.setAccountNumber(accountNumberFromHeader);
 
         TransactionResponse result = transactionService.withdraw(request);
 
@@ -62,14 +63,14 @@ public class TransactionController {
 //        evt.put("amount", request.getAmount());
 //        transactionService.publish(evt);
 
-        log.info("TransactionController:withdraw:End...");
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/transfer")
-    @Transactional
-    public ResponseEntity<TransactionResponse>  transfer(@RequestBody TransferRequest request) {
-        log.info("TransactionController:transfer:Init...");
+    public ResponseEntity<TransactionResponse>  transfer(@RequestBody TransferRequest request,
+                                                         @RequestHeader("accountNumber") String accountNumberFromHeader) {
+
+        request.setSenderAccountNumber(accountNumberFromHeader);
 
         TransactionResponse result = transactionService.transfer(request);
 
@@ -82,7 +83,6 @@ public class TransactionController {
 //        evt.put("amount", request.getAmount());
 //        transactionService.publish(evt);
 
-        log.info("TransactionController:transfer:End...");
         return ResponseEntity.ok(result);
     }
 }

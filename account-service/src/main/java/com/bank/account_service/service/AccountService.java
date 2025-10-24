@@ -23,7 +23,6 @@ public class AccountService {
 
     public AccountResponse create(CreateAccountRequest request) {
         //Todo  Need to do some changes
-
         Account account = new Account(request.getAccountHolder(), request.getAccountNumber());
         account = accountRepository.save(account);
 
@@ -61,11 +60,5 @@ public class AccountService {
         return new AccountResponse(account.getAccountNumber(), account.getAccountHolder(), account.getBalance());
     }
 
-
-    private String generateAccountNumber() {
-        Random random = new Random();
-        int number = 100000 + random.nextInt(900000);
-        return "ACC" + number;
-    }
 }
 

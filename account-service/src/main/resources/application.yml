@@ -23,3 +23,7 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+eureka:
+  instance:
+    hostname: localhost

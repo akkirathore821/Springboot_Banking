@@ -5,17 +5,15 @@ import com.bank.transaction_service.model.BalanceUpdateRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "account-service", path = "/api/accounts")
 public interface FeignAccountClient {
 
 
-    @GetMapping("/{accountNumber}")
-    AccountResponse getAccountByAccountNumber(@PathVariable String accountNumber);
+    @GetMapping()
+    AccountResponse getAccountByAccountNumber(@RequestHeader("accountNumber") String accountNumberFromHeader);
+//    AccountResponse getAccountByAccountNumber(@PathVariable String accountNumber);
 
     @PostMapping(value = "/update_balance", consumes = "application/json")
     AccountResponse updateBalance(@RequestBody BalanceUpdateRequest request);

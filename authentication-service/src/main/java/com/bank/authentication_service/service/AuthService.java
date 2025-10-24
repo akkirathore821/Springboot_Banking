@@ -62,11 +62,18 @@ public class AuthService {
                 .build();
     }
 
-
     //Todo Improvise this function
     private String generateAccountNumber() {
         Random random = new Random();
         int number = 100000 + random.nextInt(900000);
         return "ACC" + number;
+    }
+
+    public AuthDetailsResponse getAuthDetails(AuthDetailsRequest request) {
+        AuthDetails authDetails = repository.findByUsername(request.getUsername());
+        return new AuthDetailsResponse().builder()
+                .username(authDetails.getUsername())
+                .password(authDetails.getPassword())
+                .build();
     }
 }

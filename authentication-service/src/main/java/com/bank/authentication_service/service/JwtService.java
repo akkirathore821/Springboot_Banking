@@ -16,8 +16,6 @@ public class JwtService {
     @Autowired
     private JwtUtils jwtUtils;
 
-    public static final String SECRET = "536CPO736VIDOEX9823OABV7639DFRX7H92F42DJC09SMCSPSMSP62516554SCHOSD685437";
-
     public JwtService(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }

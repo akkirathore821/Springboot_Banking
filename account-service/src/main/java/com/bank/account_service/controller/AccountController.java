@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import static com.bank.account_service.constants.Constants.Redis_Account_Topic_Name;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/accounts")
@@ -28,32 +30,30 @@ public class AccountController {
     }
 
     @PostMapping("/create")
-    @Transactional
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AccountResponse> createAccount(@RequestBody CreateAccountRequest request) {
         AccountResponse result = accountService.create(request);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{accountNumber}")
-    @Transactional
-    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@PathVariable String accountNumber) {
-        if (!accountNumber.matches("^[A-Z\\d\\s]+$")) {
+    @GetMapping()
+    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@RequestHeader("accountNumber") String accountNumberFromHeader) {
+        if (!accountNumberFromHeader.matches("^[A-Z\\d\\s]+$")) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,
                     "AccountNumber should only contain alphanumeric characters");
         }
-        AccountResponse result = accountService.getAccount(accountNumber);
+//        log.info("Account Service : Account No. : " + accountNumberFromHeader);
+        AccountResponse result = accountService.getAccount(accountNumberFromHeader);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/update_balance")
-    @Transactional
     public ResponseEntity<AccountResponse> updateBalance(@RequestBody BalanceUpdateRequest request) {
 
         AccountResponse result = accountService.updateBalance(request);
 
 //        Todo sending the notification to the Notification Service using redis
-//        redisTemplate.convertAndSend(Redis_Account_Topic_Name,result.toString());
+        redisTemplate.convertAndSend(Redis_Account_Topic_Name,result.toString());
 
         return ResponseEntity.ok(result);
     }
