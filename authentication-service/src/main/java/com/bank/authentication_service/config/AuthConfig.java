@@ -32,14 +32,18 @@ public class AuthConfig {
 
                 // ✅ Authorization configuration
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**","/api/auth_details/**").permitAll()
-                        .anyRequest().authenticated()
-                ).build();
+                        .anyRequest().permitAll()
+                )
+
+                // ✅ Set your UserDetailsService
+                .userDetailsService(userDetailsService)
+
+                .build();
 
 //                // ✅ Enable Basic Auth
 //                .httpBasic(httpBasic -> {})
 //
-//                // ✅ Set your UserDetailsService
+                // ✅ Set your UserDetailsService
 //                .userDetailsService(userDetailsService)
 //
 //                // ✅ Disable sessions for JWT-based APIs

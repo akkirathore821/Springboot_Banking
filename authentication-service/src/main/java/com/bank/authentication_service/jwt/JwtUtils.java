@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +13,16 @@ import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class JwtUtils {
 
     public static final String SECRET = "536CPO736VIDOEX9823OABV7639DFRX7H92F42DJC09SMCSPSMSP62516554SCHOSD685437";
 
     public String createToken(Map<String, Object> claims, UserDetails userDetails) {
+
+//        log.info("JwtUtils : " + userDetails.getAuthorities().iterator().next().getAuthority());
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())

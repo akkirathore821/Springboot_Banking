@@ -18,7 +18,7 @@ import static com.bank.account_service.constants.Constants.Redis_Account_Topic_N
 
 @Slf4j
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("/api/accounts/accounts")
 public class AccountController {
 
     private final AccountService accountService;
@@ -36,24 +36,13 @@ public class AccountController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping()
-    public ResponseEntity<AccountResponse> getAccountByAccountNumber(@RequestHeader("accountNumber") String accountNumberFromHeader) {
-        if (!accountNumberFromHeader.matches("^[A-Z\\d\\s]+$")) {
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,
-                    "AccountNumber should only contain alphanumeric characters");
-        }
-//        log.info("Account Service : Account No. : " + accountNumberFromHeader);
-        AccountResponse result = accountService.getAccount(accountNumberFromHeader);
-        return ResponseEntity.ok(result);
-    }
-
     @PostMapping("/update_balance")
     public ResponseEntity<AccountResponse> updateBalance(@RequestBody BalanceUpdateRequest request) {
 
         AccountResponse result = accountService.updateBalance(request);
 
 //        Todo sending the notification to the Notification Service using redis
-        redisTemplate.convertAndSend(Redis_Account_Topic_Name,result.toString());
+//        redisTemplate.convertAndSend(Redis_Account_Topic_Name,result.toString());
 
         return ResponseEntity.ok(result);
     }

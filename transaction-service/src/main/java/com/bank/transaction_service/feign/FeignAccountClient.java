@@ -7,15 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "account-service", path = "/api/accounts")
+@FeignClient(name = "account-service")
 public interface FeignAccountClient {
 
 
-    @GetMapping()
+    @GetMapping("/api/accounts/accounts_details/getAccount")
     AccountResponse getAccountByAccountNumber(@RequestHeader("accountNumber") String accountNumberFromHeader);
-//    AccountResponse getAccountByAccountNumber(@PathVariable String accountNumber);
 
-    @PostMapping(value = "/update_balance", consumes = "application/json")
+    @PostMapping(value = "/api/accounts/accounts/update_balance", consumes = "application/json")
     AccountResponse updateBalance(@RequestBody BalanceUpdateRequest request);
 
 }

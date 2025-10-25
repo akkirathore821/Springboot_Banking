@@ -21,7 +21,7 @@ public class AuthDetails {
     @Column(unique = true, nullable = false)
     private String password;
     private String accountNumber;
-//    private List<String> roles;
+    private Roles roles;
 
     public Long getId() {
         return id;
@@ -53,6 +53,14 @@ public class AuthDetails {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 }
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import reactivefeign.spring.config.ReactiveFeignClient;
 import reactor.core.publisher.Mono;
 
-@ReactiveFeignClient(name = "authentication-service", path = "/api/auth_details")
+@ReactiveFeignClient(name = "authentication-service", path = "/api/auth/auth_details")
 public interface FeignAuthenticationClient {
 
     @PostMapping(value = "/getAuthDetails",consumes = "application/json")

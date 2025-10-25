@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auth/auth")
 public class AuthController {
 
     @Autowired
@@ -23,10 +23,10 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authService.register(request));
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request) {
+//        return ResponseEntity.ok(authService.register(request));
+//    }
 
 //    @PostMapping("/getAuthDetails")
 //    public ResponseEntity<AuthDetailsResponse> getAuthDetails(@RequestBody AuthDetailsRequest request) {

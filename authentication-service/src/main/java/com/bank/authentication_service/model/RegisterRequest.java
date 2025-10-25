@@ -27,6 +27,8 @@ public class RegisterRequest {
             message = "Password must contain at least one digit, one lowercase, one uppercase letter, and one special character"
     )
     private String password;
+    @NotBlank(message = "Role cannot be empty")
+    private Roles role;
 
     public String getAccountHolder() {
         return accountHolder;
@@ -50,5 +52,13 @@ public class RegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }

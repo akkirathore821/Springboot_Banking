@@ -13,4 +13,5 @@ public class RegisterResponse {
     private String username;
     private String accountHolder;
     private String accountNumber;
+    private Roles role;
 }

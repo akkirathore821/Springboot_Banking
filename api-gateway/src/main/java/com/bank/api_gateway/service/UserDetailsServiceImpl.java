@@ -39,14 +39,13 @@ public class UserDetailsServiceImpl implements ReactiveUserDetailsService {
     public Mono<UserDetails> findByUsername(String username) {
         log.info("Loading user details for username: {}", username);
 
-        feignAuthenticationClient.getAuthDetails(new AuthDetailsRequest(username))
-                .doOnNext(resp -> log.info("Auth Details: " + resp));
+//        feignAuthenticationClient.getAuthDetails(new AuthDetailsRequest(username))
+//                .doOnNext(resp -> log.info("Auth Details: " + resp));
 
         return feignAuthenticationClient.getAuthDetails(new AuthDetailsRequest(username))
                 .map(authDetails -> User
                         .withUsername(authDetails.getUsername())
                         .password(authDetails.getPassword())
-//                        .roles("USER")  // or use roles from authDetails if you have them
                         .build()
                 )
                 .switchIfEmpty(Mono.error(new RuntimeException("User not found: " + username)));

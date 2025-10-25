@@ -1,7 +1,7 @@
 package com.bank.authentication_service.service;
 
 import com.bank.authentication_service.jwt.JwtUtils;
-import lombok.RequiredArgsConstructor;
+import com.bank.authentication_service.model.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,10 +20,11 @@ public class JwtService {
         this.userDetailsService = userDetailsService;
     }
 
-    public String generateToken(String username, String accountNumber) {
+    public String generateToken(String username, String accountNumber, Roles roles) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         Map<String, Object> claims = new HashMap<>();
         claims.put("accountNumber",accountNumber);
+        claims.put("role", roles);
         return jwtUtils.createToken(claims, userDetails);
     }
 }

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class AuthDetailsResponse {
     private String username;
     private String password;
+    private Roles role;
 
     public String getUsername() {
         return username;

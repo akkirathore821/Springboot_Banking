@@ -32,12 +32,15 @@ public class AuthService {
 
 
     public JWTTokenResponse login(LoginRequest request) {
+        log.info("Login : " + request.toString());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
+        log.info("Login : " + authentication.isAuthenticated());
 
         if(authentication.isAuthenticated()){
             AuthDetails authDetails = repository.findByUsername(request.getUsername());
             return JWTTokenResponse.builder()
-                    .token(jwtService.generateToken(authDetails.getUsername(),authDetails.getAccountNumber()))
+                    .token(jwtService.generateToken(authDetails.getUsername(),
+                            authDetails.getAccountNumber(), authDetails.getRoles()))
                     .build();
         }else throw new WrongCredentialsException("Wrong credentials");
     }
@@ -48,6 +51,7 @@ public class AuthService {
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .accountNumber(generateAccountNumber())
+                .roles(request.getRole())
                 .build();
         newUser = repository.save(newUser);
 
@@ -59,6 +63,7 @@ public class AuthService {
                 .username(newUser.getUsername())
                 .accountHolder(accountResponse.getAccountHolder())
                 .accountNumber(accountResponse.getAccountNumber())
+                .role(newUser.getRoles())
                 .build();
     }
 
@@ -74,6 +79,7 @@ public class AuthService {
         return new AuthDetailsResponse().builder()
                 .username(authDetails.getUsername())
                 .password(authDetails.getPassword())
+                .role(authDetails.getRoles())
                 .build();
     }
 }

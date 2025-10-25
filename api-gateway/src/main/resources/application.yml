@@ -15,14 +15,17 @@ spring:
           uri: lb://account-service
           predicates:
             - Path=/api/accounts/**
+
         - id: transaction-service
           uri: lb://transaction-service
           predicates:
             - Path=/api/transactions/**
+
         - id: authentication-service
           uri: lb://authentication-service
           predicates:
             - Path=/api/auth/**
+
       server:
         webflux:
           discovery:
