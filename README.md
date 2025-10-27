@@ -236,44 +236,73 @@
     Bearer Token : Authorized User or Admin
 ```
 
-### 🔨 Run the App
+[//]: # ()
+[//]: # (### 🔨 Run the App)
 
-<b>Local</b>
+[//]: # ()
+[//]: # (<b>Local</b>)
 
-<b>1 )</b> Clone project `git clone https://github.com/devsyx/spring-boot-microservices.git`
+[//]: # ()
+[//]: # (<b>1 &#41;</b> Clone project `git clone https://github.com/devsyx/spring-boot-microservices.git`)
 
-<b>2 )</b> Go to the project's home directory :  `cd spring-boot-microservices`
+[//]: # ()
+[//]: # (<b>2 &#41;</b> Go to the project's home directory :  `cd spring-boot-microservices`)
 
-<b>3 )</b> Run docker compose <b>`docker compose up`</b></b>
+[//]: # ()
+[//]: # (<b>3 &#41;</b> Run docker compose <b>`docker compose up`</b></b>)
 
-<b>4 )</b> Run <b>Eureka Server</b>
+[//]: # ()
+[//]: # (<b>4 &#41;</b> Run <b>Eureka Server</b>)
 
-<b>5 )</b> Run <b>Gateway</b>
+[//]: # ()
+[//]: # (<b>5 &#41;</b> Run <b>Gateway</b>)
 
-<b>6 )</b> Run <b>Config Server</b>
+[//]: # ()
+[//]: # (<b>6 &#41;</b> Run <b>Config Server</b>)
 
-<b>7 )</b> Run other services (<b>auth-service</b>, <b>user-service</b>, <b>job-service</b>, <b>notification-service</b>  and lastly <b>
-file-storage</b>)
+[//]: # ()
+[//]: # (<b>7 &#41;</b> Run other services &#40;<b>auth-service</b>, <b>user-service</b>, <b>job-service</b>, <b>notification-service</b>  and lastly <b>)
 
-<b>8 )</b> For swagger ui localhost:8080/v1/{service-name}/swagger-ui/index.html</b>
+[//]: # (file-storage</b>&#41;)
 
+[//]: # ()
+[//]: # (<b>8 &#41;</b> For swagger ui localhost:8080/v1/{service-name}/swagger-ui/index.html</b>)
 
-### Screenshots
+[//]: # ()
+[//]: # ()
+[//]: # (### Screenshots)
 
-<details>
-<summary>Click here to show the screenshot of project</summary>
-    <p> Eureka Server</p>
-    <img src ="screenshots/eureka.png" alt="">
-    <p>User Service Swagger UI</p>
-    <img src ="screenshots/user.png" alt="">
-    <p>Job Service Swagger UI</p>
-    <img src ="screenshots/category-advert.png" alt="">
-    <img src ="screenshots/offer-job.png" alt="">
-    <p> Auth Service Swagger UI </p>
-    <img src ="screenshots/auth.png" alt="">
-    <p>Notification Kafka UI</p>
-    <img src ="screenshots/kafka-ui.png" alt="">
-    <p>File Storage Postman</p>
-    <img src ="screenshots/file-upload.png" alt="">
-    <img src ="screenshots/file-download.png" alt="">
-</details>
+[//]: # ()
+[//]: # (<details>)
+
+[//]: # (<summary>Click here to show the screenshot of project</summary>)
+
+[//]: # (    <p> Eureka Server</p>)
+
+[//]: # (    <img src ="screenshots/eureka.png" alt="">)
+
+[//]: # (    <p>User Service Swagger UI</p>)
+
+[//]: # (    <img src ="screenshots/user.png" alt="">)
+
+[//]: # (    <p>Job Service Swagger UI</p>)
+
+[//]: # (    <img src ="screenshots/category-advert.png" alt="">)
+
+[//]: # (    <img src ="screenshots/offer-job.png" alt="">)
+
+[//]: # (    <p> Auth Service Swagger UI </p>)
+
+[//]: # (    <img src ="screenshots/auth.png" alt="">)
+
+[//]: # (    <p>Notification Kafka UI</p>)
+
+[//]: # (    <img src ="screenshots/kafka-ui.png" alt="">)
+
+[//]: # (    <p>File Storage Postman</p>)
+
+[//]: # (    <img src ="screenshots/file-upload.png" alt="">)
+
+[//]: # (    <img src ="screenshots/file-download.png" alt="">)
+
+[//]: # (</details>)
