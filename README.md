@@ -1,4 +1,4 @@
-# Spring Boot Microservices Project
+# Spring Boot Banking Microservices Project
 (Eureka Server, API Gateway, Kafka, Postgresql, JWT, Authentication, Authorization, Redis, Docker)
 
 # About the project
